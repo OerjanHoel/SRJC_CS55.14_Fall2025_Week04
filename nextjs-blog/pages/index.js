@@ -1,12 +1,22 @@
 import Head from 'next/head'; // Imports head from Next.js
-import Link from 'next/link';
+import Link from 'next/link'; // Imports link from Next.js
 import Layout, { siteTitle } from '../components/layout'; // Imports layout and sisteTitle from layout.js. siteTitle a variable in layout.js
-import utilStyles from '../styles/utils.module.css';
+import utilStyles from '../styles/utils.module.css'; // Imports CSS from utils.module.css file
+import { getSortedPostsData } from '../lib/posts'; // Imports function from posts.js
 
+// Function creates the static html for our blog posts
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+}
 // Function creates Home based on the importet 
 // compnonents from next.js and layout.js file
 // Compnents are JSX elements
-export default function Home() {
+export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
@@ -21,6 +31,20 @@ export default function Home() {
           This is a sample website we are building in CS55.13 class {' '}
           <Link href="posts/first-post">First post</Link>.
         </p>
+      </section>
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <ul className={utilStyles.list}>
+          {allPostsData.map(({ id, date, title }) => (
+            <li className={utilStyles.listItem} key={id}>
+              {title}
+              <br />
+              {id}
+              <br />
+              {date}
+            </li>
+          ))}
+        </ul>
       </section>
     </Layout>
   );
