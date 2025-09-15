@@ -3,6 +3,7 @@ import Link from 'next/link'; // Imports link from Next.js
 import Layout, { siteTitle } from '../components/layout'; // Imports layout and sisteTitle from layout.js. siteTitle a variable in layout.js
 import utilStyles from '../styles/utils.module.css'; // Imports CSS from utils.module.css file
 import { getSortedPostsData } from '../lib/posts'; // Imports function from posts.js
+import Date from '../components/date';
 
 // Function creates the static html for our blog posts
 export async function getStaticProps() {
@@ -37,11 +38,11 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.list}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
+              <Link href={`/posts/${id}`}>{title}</Link>
               <br />
-              {id}
-              <br />
-              {date}
+              <small className={utilStyles.lightText}>
+                <Date dateString={date} />
+              </small>
             </li>
           ))}
         </ul>
