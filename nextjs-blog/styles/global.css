@@ -10,7 +10,7 @@ body {
     sans-serif;
   line-height: 1.5;
   font-size: 20px;
-  background: rgb(108, 140, 245);
+  background: rgb(87, 92, 110);
 }
  
 * {
@@ -18,12 +18,12 @@ body {
 }
  
 a {
-  color: #00f3be;
+  color: #042352;
   text-decoration: none;
 }
  
 a:hover {
-  color: deeppink;
+  color: rgb(73, 94, 211);
 }
  
 img {
